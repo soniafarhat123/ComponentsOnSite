@@ -1,0 +1,7 @@
+{
+    "name": "onsiteApp",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "react-vite"
+}

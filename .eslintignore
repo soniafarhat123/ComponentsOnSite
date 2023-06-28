@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+build
+package-lock.json
+public
+cypress.config.ts
+cypress
+vite.config.ts

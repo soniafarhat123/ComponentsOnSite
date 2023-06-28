@@ -1,0 +1,42 @@
+.ion-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.ion-card {
+  width: 160px;
+  margin: 8px;
+  box-shadow: 0 2px 4px rgba(243, 239, 239, 0.1), 0 2px 3px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+}
+
+@media screen and (min-width: 370px) {
+  .ion-card {
+    width: 45%;
+  }
+}
+
+@media screen and (min-width: 412px) {
+  .ion-card {
+    width: 45%;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .ion-card {
+    width: 30%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .ion-card {
+    width: 18%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .ion-card {
+    width: 13%;
+  }
+}
