@@ -4,7 +4,7 @@ import '../../theme/Login.css';
 import { Image, Input } from '../../../lib/ionic-adapter-compo';
 import { Button, Card } from '../../components';
 
-const Container = (props : any) => {
+const Container = (props: any) => {
     return <div className={props.className}>{props.children}</div>;
 };
 
@@ -21,6 +21,7 @@ const Login: React.FC = () => {
                     alt="logo OnSite"
                 ></Image>
                 <Card
+                    cardHeader={true}
                     className="login-card"
                     classNameCardHeader="login-card-header"
                     subtitle="Sign in"

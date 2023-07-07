@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import { Button, MyButton } from '../../../lib/ionic-adapter-compo/BaseButton';
 
 export const TypeColor = {
@@ -24,19 +24,18 @@ export enum ButtonFill {
     outline = 'outline',
     solid = 'solid',
 }
-export type _MyIcon = {
+export type IconElement = {
     myIcon: JSX.Element;
     position: IconPosition;
 };
 export type IconDisabled = true | false;
 interface ButtonProps extends MyButton {
     color?: (typeof TypeColor)[keyof typeof TypeColor];
-    icon?: _MyIcon;
+    icon?: IconElement;
     label?: string;
     disabled?: IconDisabled;
     fill?: ButtonFill;
-    href?: string;
-    actions?: { icon: JSX.Element; call: () => void }[];
+    actions?: { item: JSX.Element; call?: () => void }[];
     style?: Record<string, string>;
 }
 
@@ -47,12 +46,17 @@ const SimpleButton: React.FC<ButtonProps> = ({
     actions,
     className,
     fill,
-    href,
     disabled,
     style,
+    children,
     ...props
 }) => {
-    console.log(actions);
+    // console.log(actions);
+    const handleActionClick = (action?: () => void) => {
+        if (action) {
+            action();
+        }
+    };
     return (
         <Button
             {...props}
@@ -60,7 +64,6 @@ const SimpleButton: React.FC<ButtonProps> = ({
             color={color}
             expand="block"
             fill={fill}
-            href={href && href.length > 0 ? href : ''}
             disabled={disabled}
             className={className && className.length > 0 ? className : ''}
         >
@@ -68,6 +71,16 @@ const SimpleButton: React.FC<ButtonProps> = ({
             {label && label.length > 0 ? label : null}
             {icon && icon.position === IconPosition.end && icon.myIcon}
             {icon && icon.position === IconPosition.only && icon.myIcon}
+            {children}
+            {actions &&
+                actions.map((action, index) => (
+                    <div
+                        key={index}
+                        onClick={() => handleActionClick(action.call)}
+                    >
+                        {action.item}
+                    </div>
+                ))}
         </Button>
     );
 };

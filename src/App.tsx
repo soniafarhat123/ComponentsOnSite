@@ -1,5 +1,10 @@
-import React from 'react';
-import { IonApp, IonContent, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import React, { useState } from 'react';
+import {
+    IonApp,
+    IonContent,
+    IonRouterOutlet,
+    setupIonicReact,
+} from '@ionic/react';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -20,23 +25,53 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './presentation/theme/variables.css';
 import useSwitchDarkMode from './core/dark_light_mode/useSwitchDarkMode';
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route } from 'react-router-dom';
 import {
     Button,
     ButtonFill,
     IconPosition,
     TypeColor,
 } from './presentation/components/Button';
-import { logoIonic } from 'ionicons/icons';
-import { Icon } from './lib/ionic-adapter-compo';
+import {
+    caretUpSharp,
+    eyeOffOutline,
+    eyeOutline,
+    filter,
+    logoIonic,
+} from 'ionicons/icons';
+import { Icon, Image, Input, Popover } from './lib/ionic-adapter-compo';
 import { Card } from './presentation/components';
 import { IonReactRouter } from '@ionic/react-router';
 import Login from './presentation/pages/Login/Login';
+import { SearchBar } from './presentation/components/SearchBar';
+import { List } from './presentation/components/List';
+import { Item, LinesType } from './presentation/components/Item';
+import './presentation/theme/test.css';
 
 setupIonicReact();
 
 function App() {
     const [darkMode, toggleDarkMode] = useSwitchDarkMode();
+    const [showPopover, setShowPopover] = useState(false);
+
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [passwordToggleIcon, setPasswordToggleIcon] = useState(eyeOutline);
+    const handleActionClick = () => {
+        console.log('Action clicked!');
+    };
+    const handleButtonClick = () => {
+        console.log('Button clicked!');
+    };
+    const handlePasswordIcon = () => {
+        setShowPassword(!showPassword);
+        if (passwordToggleIcon == eyeOutline) {
+            setPasswordToggleIcon(eyeOffOutline);
+        } else {
+            setPasswordToggleIcon(eyeOutline);
+        }
+    };
+
     return (
         <IonApp>
             {/* <IonContent>
@@ -84,8 +119,8 @@ function App() {
  
 `}</style> */}
 
-            {/* <IonContent>
-                <Button
+            <IonContent>
+                {/* <Button
                     color={TypeColor.primary}
                     fill={ButtonFill.outline}
                     icon={{
@@ -108,22 +143,23 @@ function App() {
                         myIcon: <Icon icon={logoIonic} />,
                         position: IconPosition.start,
                     }}
-                    onClick={() => console.log('hello')}
+                    // onClick={() => console.log('hello')}
                     actions={[
                         {
-                            icon: <Icon icon={logoIonic} />,
+                            item: <Icon icon={logoIonic} />,
                             call: () => {
                                 console.log('helloworld');
                             },
                         },
                         {
-                            icon: <Icon icon={logoIonic} />,
+                            item: <Icon icon={logoIonic} />,
                             call: () => {},
                         },
                     ]}
                 ></Button>
                 <div className="ion-cards">
                     <Card
+                        cardHeader={true}
                         title="Formulaire1"
                         subtitle="hello world"
                         img={
@@ -139,6 +175,7 @@ function App() {
                         className="ion-card"
                     ></Card>
                     <Card
+                        cardHeader={true}
                         title="Formulaire2"
                         styleCardHeader={{
                             paddingBottom: '0px',
@@ -151,6 +188,7 @@ function App() {
                         className="ion-card"
                     ></Card>
                     <Card
+                        cardHeader={true}
                         title="Formulaire3"
                         styleCardHeader={{
                             paddingBottom: '0px',
@@ -161,21 +199,85 @@ function App() {
                         }
                         className="ion-card"
                     ></Card>
-                </div>
-            </IonContent> */}
-           
- 
-  <IonReactRouter>
-        <IonRouterOutlet>
-         <Route exact path="/login">
-           <Login />
-         </Route>
-         <Route exact path="/">
-           <Redirect to="/login" />
-         </Route>
-       </IonRouterOutlet>
-     </IonReactRouter>
+                </div> */}
 
+               
+                
+                {/* <>
+                    <SearchBar
+                        triButton={{
+                            myTriButton: (
+                                <Button
+                                    fill={ButtonFill.clear}
+                                    className="button-icon"
+                                    id="popover-button-tri"
+                                    onClick={handleButtonClick}
+                                    icon={{
+                                        myIcon: (
+                                            <Icon
+                                                icon={filter}
+                                                slot="icon-only"
+                                            />
+                                        ),
+                                        position: IconPosition.only,
+                                    }}
+                                    actions={[
+                                        {
+                                            item: (
+                                                <Popover
+                                                    trigger="popover-button-tri"
+                                                    dismissOnSelect={false}
+                                                    side="bottom"
+                                                    alignment="center"
+                                                    showBackdrop={false}
+                                                    className="pop-width"
+                                                >
+                                                    <IonContent scrollY={true}>
+                                                        <List
+                                                            lines="full"
+                                                            className="ion-list-padding"
+                                                        >
+                                                            <Item
+                                                                button
+                                                                onClick={() => {
+                                                                    console.log(
+                                                                        'hello'
+                                                                    );
+                                                                }}
+                                                            >
+                                                                <Icon
+                                                                    icon={
+                                                                        caretUpSharp
+                                                                    }
+                                                                    size="small"
+                                                                    color="primary"
+                                                                    slot="start"
+                                                                ></Icon>
+                                                                test
+                                                            </Item>
+                                                        </List>
+                                                    </IonContent>
+                                                </Popover>
+                                            ),
+                                        },
+                                    ]}
+                                />
+                            ),
+                        }}
+                    />
+                </> */}
+            </IonContent>
+
+            <IonReactRouter>
+                <IonRouterOutlet>
+                    <Route exact path="/login">
+                        <Login />
+                    </Route>
+                    <Route exact path="/">
+                        <Redirect to="/login" />
+                    </Route>
+                </IonRouterOutlet>
+            </IonReactRouter>
         </IonApp>
     );
 }

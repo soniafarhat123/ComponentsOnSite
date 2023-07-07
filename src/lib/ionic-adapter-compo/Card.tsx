@@ -23,6 +23,7 @@ export type MyCard = React.ComponentPropsWithRef<typeof IonCard> & {
     };
     classNameCardContent?: string;
     children?: ReactNode;
+    cardHeader: boolean;
 };
 
 export default function Card({
@@ -39,28 +40,32 @@ export default function Card({
     styleCardSubTitle,
     styleCardContent,
     classNameCardContent,
+    cardHeader,
     ...props
 }: MyCard): React.JSX.Element {
     return (
         <IonCard routerLink={link && link} {...props}>
             {img && <img src={img} alt="" />}
-            <IonCardHeader
-                className={classNameCardHeader}
-                style={styleCardHeader}
-            >
-                <IonCardTitle
-                    className={classNameCardTitle}
-                    style={styleCardTitle}
+            {cardHeader && (
+                <IonCardHeader
+                    className={classNameCardHeader}
+                    style={styleCardHeader}
                 >
-                    {title}
-                </IonCardTitle>
-                <IonCardSubtitle
-                    className={classNameCardSubTitle}
-                    style={styleCardSubTitle}
-                >
-                    {subtitle}
-                </IonCardSubtitle>
-            </IonCardHeader>
+                    <IonCardTitle
+                        className={classNameCardTitle}
+                        style={styleCardTitle}
+                    >
+                        {title}
+                    </IonCardTitle>
+                    <IonCardSubtitle
+                        className={classNameCardSubTitle}
+                        style={styleCardSubTitle}
+                    >
+                        {subtitle}
+                    </IonCardSubtitle>
+                </IonCardHeader>
+            )}
+
             <IonCardContent
                 className={classNameCardContent}
                 style={styleCardContent}

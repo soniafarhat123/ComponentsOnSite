@@ -24,8 +24,8 @@ export type MyItem = React.ComponentPropsWithRef<typeof IonItem>;
 export function Label(props: MyLabel): React.JSX.Element {
     return <IonLabel {...props} />;
 }
-export function Item(props: MyItem): React.JSX.Element {
-    return <IonItem {...props} />;
+export function Item({children, ...props}: MyItem): React.JSX.Element {
+    return <IonItem {...props}>{children}</IonItem>;
 }
 
 export function Title(props: MyTitle): React.JSX.Element {
